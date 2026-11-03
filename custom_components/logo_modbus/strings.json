@@ -1,0 +1,52 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Siemens LOGO! (Modbus TCP)",
+        "description": "Enter the address of the LOGO! and how many outputs (Q) and inputs (I) to show. Modbus server must be enabled on the LOGO! (Soft Comfort: Tools → Ethernet Connections).",
+        "data": {
+          "host": "Host",
+          "port": "Port",
+          "outputs": "Number of outputs (Q)",
+          "inputs": "Number of inputs (I)",
+          "scan_interval": "Polling interval"
+        },
+        "data_description": {
+          "host": "IP address of the LOGO!, e.g. 192.168.0.230.",
+          "port": "Modbus TCP port, normally 502.",
+          "outputs": "Creates switches Q1…Qn. Each switch writes flag Mn and shows the real state of Qn (0–20).",
+          "inputs": "Creates binary sensors I1…In (0–24).",
+          "scan_interval": "How often the state is read, in seconds (1–60)."
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Failed to connect"
+    },
+    "abort": {
+      "already_configured": "Device is already configured"
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "LOGO! options",
+        "data": {
+          "outputs": "Number of outputs (Q)",
+          "inputs": "Number of inputs (I)",
+          "scan_interval": "Polling interval"
+        },
+        "data_description": {
+          "outputs": "Switches Q1…Qn (0–20).",
+          "inputs": "Binary sensors I1…In (0–24).",
+          "scan_interval": "How often the state is read, in seconds (1–60)."
+        }
+      }
+    }
+  },
+  "exceptions": {
+    "write_failed": {
+      "message": "Could not write flag {flag} on LOGO! {host}: {error}"
+    }
+  }
+}

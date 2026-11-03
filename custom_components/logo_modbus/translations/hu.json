@@ -1,0 +1,52 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Siemens LOGO! (Modbus TCP)",
+        "description": "Add meg a LOGO! címét, és hogy hány kimenet (Q) és bemenet (I) jelenjen meg. A LOGO!-n engedélyezni kell a Modbus szervert (Soft Comfort: Tools → Ethernet Connections).",
+        "data": {
+          "host": "Gazdagép",
+          "port": "Port",
+          "outputs": "Kimenetek száma (Q)",
+          "inputs": "Bemenetek száma (I)",
+          "scan_interval": "Lekérdezési időköz"
+        },
+        "data_description": {
+          "host": "A LOGO! IP-címe, pl. 192.168.0.230.",
+          "port": "Modbus TCP port, általában 502.",
+          "outputs": "Q1…Qn kapcsolókat hoz létre. Minden kapcsoló az Mn merkert írja, és a Qn valós állapotát mutatja (0–20).",
+          "inputs": "I1…In bináris érzékelőket hoz létre (0–24).",
+          "scan_interval": "Milyen gyakran olvassa az állapotot, másodpercben (1–60)."
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Nem sikerült csatlakozni"
+    },
+    "abort": {
+      "already_configured": "Az eszköz már konfigurálva van"
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "LOGO! beállítások",
+        "data": {
+          "outputs": "Kimenetek száma (Q)",
+          "inputs": "Bemenetek száma (I)",
+          "scan_interval": "Lekérdezési időköz"
+        },
+        "data_description": {
+          "outputs": "Q1…Qn kapcsolók (0–20).",
+          "inputs": "I1…In bináris érzékelők (0–24).",
+          "scan_interval": "Milyen gyakran olvassa az állapotot, másodpercben (1–60)."
+        }
+      }
+    }
+  },
+  "exceptions": {
+    "write_failed": {
+      "message": "Nem sikerült írni a(z) {flag} merkert a(z) {host} LOGO!-n: {error}"
+    }
+  }
+}

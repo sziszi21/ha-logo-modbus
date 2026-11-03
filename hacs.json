@@ -1,0 +1,5 @@
+{
+  "name": "Siemens LOGO! Modbus TCP",
+  "homeassistant": "2025.2.0",
+  "render_readme": true
+}
