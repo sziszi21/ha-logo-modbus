@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import asyncio
-import socket
 
 import pytest
 
@@ -99,11 +98,8 @@ async def test_timeout(logo: FakeLogo) -> None:
     await c.close()
 
 
-async def test_connection_refused() -> None:
-    with socket.socket() as s:
-        s.bind(("127.0.0.1", 0))
-        port = s.getsockname()[1]  # nothing listens here after close
-    c = LogoModbusClient("127.0.0.1", port, timeout=1.0)
+async def test_connection_refused(closed_port: int) -> None:
+    c = LogoModbusClient("127.0.0.1", closed_port, timeout=1.0)
     with pytest.raises(LogoModbusError):
         await c.read_discrete_inputs(0, 1)
 

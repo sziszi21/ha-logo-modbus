@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 from datetime import timedelta
-import socket
 
 import pytest
 
@@ -184,11 +183,8 @@ async def test_write_failure_raises(hass: HomeAssistant, fake_logo: FakeLogo) ->
     assert await hass.config_entries.async_unload(entry.entry_id)
 
 
-async def test_setup_retry_when_unreachable(hass: HomeAssistant) -> None:
-    with socket.socket() as s:
-        s.bind(("127.0.0.1", 0))
-        port = s.getsockname()[1]
-    entry = await _setup(hass, port)
+async def test_setup_retry_when_unreachable(hass: HomeAssistant, closed_port: int) -> None:
+    entry = await _setup(hass, closed_port)
     assert entry.state is ConfigEntryState.SETUP_RETRY
 
 

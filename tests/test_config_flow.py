@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-import socket
-
 import pytest
 
 pytest.importorskip("pytest_homeassistant_custom_component")
@@ -22,12 +20,6 @@ from custom_components.logo_modbus.const import (  # noqa: E402
 )
 
 from .fake_logo import FakeLogo  # noqa: E402
-
-
-def _free_port() -> int:
-    with socket.socket() as s:
-        s.bind(("127.0.0.1", 0))
-        return s.getsockname()[1]
 
 
 async def test_user_flow_creates_entry(hass: HomeAssistant, fake_logo: FakeLogo) -> None:
@@ -68,7 +60,7 @@ async def test_user_flow_creates_entry(hass: HomeAssistant, fake_logo: FakeLogo)
     assert await hass.config_entries.async_unload(entry.entry_id)
 
 
-async def test_user_flow_cannot_connect(hass: HomeAssistant) -> None:
+async def test_user_flow_cannot_connect(hass: HomeAssistant, closed_port: int) -> None:
     result = await hass.config_entries.flow.async_init(
         DOMAIN, context={"source": config_entries.SOURCE_USER}
     )
@@ -76,7 +68,7 @@ async def test_user_flow_cannot_connect(hass: HomeAssistant) -> None:
         result["flow_id"],
         {
             CONF_HOST: "127.0.0.1",
-            CONF_PORT: _free_port(),
+            CONF_PORT: closed_port,
             CONF_OUTPUTS: 8,
             CONF_INPUTS: 8,
             CONF_SCAN_INTERVAL: 2,

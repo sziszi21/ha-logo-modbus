@@ -29,3 +29,13 @@ async def fake_logo() -> AsyncGenerator[FakeLogo]:
     yield fake
     await fake.stop()
     await asyncio.sleep(0)
+
+
+@pytest.fixture
+async def closed_port() -> int:
+    """A localhost port where nothing listens (connection refused)."""
+    fake = FakeLogo()
+    await fake.start()
+    port = fake.port
+    await fake.stop()
+    return port
