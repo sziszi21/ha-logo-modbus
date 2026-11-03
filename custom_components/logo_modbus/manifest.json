@@ -1,6 +1,7 @@
 {
   "domain": "logo_modbus",
   "name": "Siemens LOGO! Modbus TCP",
+  "categories": ["hubs_protocols.building_automation"],
   "codeowners": ["@sziszi21"],
   "config_flow": true,
   "documentation": "https://github.com/sziszi21/ha-logo-modbus",
