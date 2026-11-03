@@ -20,6 +20,11 @@ if HAS_HA:
         """Load custom_components/ in every Home Assistant test."""
         yield
 
+    @pytest.fixture(autouse=True)
+    def auto_enable_sockets(socket_enabled):
+        """The harness blocks sockets; the fake LOGO! listens on 127.0.0.1."""
+        yield
+
 
 @pytest.fixture
 async def fake_logo() -> AsyncGenerator[FakeLogo]:
